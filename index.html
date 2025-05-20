@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiele Tunes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Thiele Tunes</h1>
+        <div id="server-config-section">
+            <details>
+                <summary>Server Configuration</summary>
+                <div id="server-config-form">
+                    <label for="navidrome-url">Navidrome URL:</label>
+                    <input type="text" id="navidrome-url" placeholder="e.g., http://localhost:4533">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" placeholder="Your Navidrome username">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Your Navidrome password">
+                    <button id="connect-server">Connect & Sync</button>
+                    <p id="connection-status">Status: Not Connected</p>
+                </div>
+            </details>
+        </div>
+    </header>
+
+    <main>
+        <div id="library-browser">
+            <div class="column" id="genres-column">
+                <div class="column-header-container">
+                    <h2>Genres</h2>
+                    <div class="search-input-container">
+                        <input type="text" id="genre-search" placeholder="Filter genres..." class="column-search-input">
+                        <span class="clear-search-btn" id="clear-genre-search-btn" title="Clear search">&times;</span>
+                    </div>
+                </div>
+                <div class="list-container">
+                    <ul id="genres-list"></ul>
+                </div>            
+            </div>
+            <div class="column" id="artists-column">
+                <div class="column-header-container">
+                    <h2>Artists</h2>
+                    <div class="search-input-container">
+                        <input type="text" id="artist-search" placeholder="Filter artists..." class="column-search-input">
+                        <span class="clear-search-btn" id="clear-artist-search-btn" title="Clear search">&times;</span>
+                    </div>
+                </div>
+                <div class="list-container">
+                    <ul id="artists-list"></ul>
+                </div>
+            </div>
+            <div class="column" id="albums-column">
+                <div class="column-header-container">
+                    <h2>Albums</h2>
+                    <div class="search-input-container">
+                        <input type="text" id="album-search" placeholder="Filter albums..." class="column-search-input">
+                        <span class="clear-search-btn" id="clear-album-search-btn" title="Clear search">&times;</span>
+                    </div>
+                </div>
+                <div class="list-container">
+                    <ul id="albums-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="songs-column" class="library-column">
+            <div class="column-header">
+                <h2 id="songs-header-title">Songs</h2>
+                <span id="total-songs-count">(0)</span>
+                <div class="search-input-container">
+                    <input type="text" id="song-filter-input" placeholder="Filter songs...">
+                    <span class="clear-search-btn" id="clear-song-filter-btn" title="Clear search">&times;</span>
+                </div>
+            </div>
+            <div class="song-table-container">
+                <table id="songs-table">
+                    <thead>
+                        <tr>
+                            <th data-sort-key="track">Track</th>
+                            <th data-sort-key="title">Title</th>
+                            <th data-sort-key="artist">Artist</th>
+                            <th data-sort-key="album">Album</th>
+                            <th data-sort-key="year">Year</th>
+                            <th data-sort-key="genre">Genre</th>
+                            <th data-sort-key="duration">Length</th>
+                        </tr>
+                    </thead>
+                    <tbody id="songs-list">
+                        <!-- Song rows will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="player">
+            <div id="album-art">
+                <img src="#" alt="Album Art" id="current-album-art" >
+            </div>
+            <div id="track-info">
+                <div id="current-song-title">No song selected</div>
+                <div id="current-song-artist">---</div>
+                 <div id="current-song-album">---</div>
+            </div>
+            <div id="player-controls-group">
+                <div id="player-buttons">
+                    <button id="prev-track" title="Previous Track">⏮</button>
+                    <button id="play-pause" title="Play/Pause">▶</button>
+                    <button id="next-track" title="Next Track">⏭</button>
+                </div>
+                <div id="progress-bar-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="progress-bar" value="0" step="1">
+                    <span id="total-duration">0:00</span>
+                </div>
+            </div>
+             <div id="volume-control">
+                <label for="volume-slider" title="Volume">🔊</label>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.75">
+            </div>
+        </div>
+    </main>
+
+    <div id="loading-overlay" style="display: none;">
+        <div id="loading-message">Syncing library... Please wait.</div>
+    </div>
+
+    <audio id="audio-player"></audio>
+    <script src="script.js"></script>
+</body>
+</html> 
